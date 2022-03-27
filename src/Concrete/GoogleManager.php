@@ -18,9 +18,9 @@ class GoogleManager implements IFileService
 
     /**
      * @param array $data
-     * @return object
+     * @return false|string
      */
-    public function exportFile(array $data): object
+    public function exportFile(array $data)
     {
         return FileFactory::generate($this->fileFormat, $this->platformName, $data);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Facades;
+namespace Src\Facades;
 
 use Src\Abstraction\IFileService;
 
@@ -19,24 +19,24 @@ class Platforms
 
     /**
      * @param array $data
-     * @return object
+     * @return false|string
      */
-    public function exporter(array $data): object
+    public function exporter(array $data)
     {
         try {
             $this->facebook->exportFile($data);
             $this->cimri->exportFile($data);
             $this->google->exportFile($data);
         }catch (\Exception $exception){
-            return (object) [
+            return json_encode([
                 "status" => false,
                 "message" => "Unexpected problem $exception"
-            ];
+            ]);
         }
 
-        return (object) [
+        return json_encode([
             "status" => true,
             "message" => "Exported files for all platforms as successfully."
-        ];
+        ]);
     }
 }

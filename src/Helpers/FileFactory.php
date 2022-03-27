@@ -8,9 +8,9 @@ class FileFactory
      * @param string $outputType
      * @param string $platform
      * @param array $data
-     * @return object
+     * @return false|string
      */
-    public static function generate(string $outputType, string $platform, array $data): object
+    public static function generate(string $outputType, string $platform, array $data)
     {
         return match ($outputType) {
             "json" => self::generateAsJsonFile($platform, $data),
@@ -22,33 +22,33 @@ class FileFactory
     /**
      * @param string $platform
      * @param array $data
-     * @return object
+     * @return false|string
      */
-    private static function generateAsJsonFile(string $platform, array $data): object
+    private static function generateAsJsonFile(string $platform, array $data)
     {
         try {
             $output = fopen("$platform-products.json", "w");
             fwrite($output, json_encode($data));
             fclose($output);
         } catch (\Exception $e){
-            return (object) [
+            return json_encode([
                 "status" => false,
                 "message" => "file could not create $e"
-            ];
+            ]);
         }
 
-        return (object) [
+        return json_encode([
             "status" => true,
             "message" => "file created successfully"
-        ];
+        ]);
     }
 
     /**
      * @param string $platform
      * @param array $data
-     * @return object
+     * @return false|string
      */
-    private static function generateAsXmlFile(string $platform, array $data): object
+    private static function generateAsXmlFile(string $platform, array $data)
     {
         try {
             $xml = "";
@@ -63,16 +63,16 @@ class FileFactory
             fwrite($output, $xml);
             fclose($output);
         } catch (\Exception $e){
-            return (object) [
+            return json_encode([
                 "status" => false,
                 "message" => "file could not create $e"
-            ];
+            ]);
         }
 
-        return (object) [
+        return json_encode([
             "status" => true,
             "message" => "file created successfully"
-        ];
+        ]);
 
     }
 
