@@ -1,0 +1,19 @@
+{
+    "name": "bayindir/product-feeder-system",
+    "description": "Product feeder system",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Ibrahim Bayindir",
+            "email": "ibrahimbyndr96@icloud.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    }
+}
